@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 
+//Connection on mongo
 mongoose.connect(
     'mongodb+srv://ulisessdev:googlemx@cluster0-ikksp.mongodb.net/test?retryWrites=true&w=majority',
     { useNewUrlParser: true, useFindAndModify: false }
