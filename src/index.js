@@ -19,9 +19,14 @@ mongoose.connect(
 
 
 const app = express()
+
+//Middlewares
 app.use(cors())
 app.use(express.json())
+
+//Routes
 app.use('/users', userRouter)
+
 const server = http.createServer(app)
 
 const host = process.env.HOST || '0.0.0.0'
