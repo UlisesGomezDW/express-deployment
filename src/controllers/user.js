@@ -4,30 +4,34 @@ const actionUser = {}
 actionUser.createUser = async (req, res) => {
     const {name, age} = req.body
     const newUser = new User({name, age})
-    await newUser.save()
-    res.json('Added success!')
+    newUser.save()
+    .then(()=>res.json('User created success!'))
+    .catch(e=> res.json(e))
 }
 
-actionUser.getUsers = async (req, res) => {
+actionUser.getUsers = (req, res) => {
     User.find()
     .then(users=> res.json(users))
     .catch(e=> res.json(e))
 }
 
-actionUser.getUser = async (req, res) => {
-    let user = await User.findById(req.params.id)
-    res.json(user)
+actionUser.getUser = (req, res) => {
+    User.findById(req.params.id)
+    .then(user=>res.json(user))
+    .catch(e=> res.json(e))
 }
 
-actionUser.updateUser = async (req, res) => {
+actionUser.updateUser = (req, res) => {
     const {name, age} = req.body
-    await User.findByIdAndUpdate(req.params.id, {name, age})
-    res.json('Updated success!')
+    User.findByIdAndUpdate(req.params.id, {name, age})
+    .then(()=>res.json('User updates success!'))
+    .catch(e=> res.json(e))
 }
 
-actionUser.deleteUser = async (req, res) => {
-    await User.findByIdAndDelete(req.params.id)
-    res.json('Deleted success!')
+actionUser.deleteUser = (req, res) => {
+    User.findByIdAndDelete(req.params.id)
+    .then(()=>res.json('User deleted success!'))
+    .catch(e=> res.json(e))
 }
 
 module.exports = actionUser
